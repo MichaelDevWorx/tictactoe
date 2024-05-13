@@ -160,6 +160,7 @@ function checkForWinX() {
         playerTurn = "0";
     } else {
         playerTurn = "2";
+        statusBox.textContent = "Player 2's Turn"
     }
      
 }
@@ -171,6 +172,7 @@ function checkForWinO() {
         playerTurn = "0";
     } else {
         playerTurn = "1";
+        statusBox.textContent = "Player 1's Turn"
     }
 }
 
