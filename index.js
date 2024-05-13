@@ -11,23 +11,15 @@ const statusBox = document.querySelector(".status");
 const resetButton = document.querySelector(".reset");
 
 let playerTurn = "1"
+let turns = 0;
 
 box1.addEventListener("click", event => {
     if (playerTurn === "1" && box1.textContent === "") {
         box1.textContent = "X";
         checkForWinX();
-        // if ( (box1.textContent === "X" && box2.textContent === "X" && box3.textContent === "X") || (box4.textContent === "X" && box5.textContent === "X" && box6.textContent === "X") || (box7.textContent === "X" && box8.textContent === "X" && box9.textContent === "X") || (box1.textContent === "X" && box4.textContent === "X" && box7.textContent === "X") || (box2.textContent === "X" && box5.textContent === "X" && box8.textContent === "X") || (box3.textContent === "X" && box6.textContent === "X" && box9.textContent === "X") || (box1.textContent === "X" && box5.textContent === "X" && box9.textContent === "X") || (box3.textContent === "X" && box5.textContent === "X" && box7.textContent === "X")) {
-        //     statusBox.textContent = "Player 1 Wins!";
-        //     gameOver();
-        //     playerTurn = "0";
-        // } else {
-        // statusBox.textContent = "Player 2's Turn";
-        // playerTurn = "2"; 
-        // }
     } else if (playerTurn === "2" && box1.textContent === "") {
         box1.textContent = "O";
         checkForWinO();
-          
     }
 })
 
@@ -37,8 +29,7 @@ box2.addEventListener("click", event => {
         checkForWinX();
     } else if (playerTurn === "2" && box2.textContent === "") {
         box2.textContent = "O";
-        checkForWinO();
-            
+        checkForWinO();           
     }
 })
 
@@ -49,8 +40,7 @@ box3.addEventListener("click", event => {
         checkForWinX();
     } else if (playerTurn === "2" && box3.textContent === "") {
         box3.textContent = "O";
-        checkForWinO();
-            
+        checkForWinO();           
     }
 })
 
@@ -70,8 +60,7 @@ box5.addEventListener("click", event => {
         checkForWinX(); 
     } else if (playerTurn === "2" && box5.textContent === "") {
         box5.textContent = "O";
-        checkForWinO();
-            
+        checkForWinO();        
     }
 })
 
@@ -92,8 +81,7 @@ box7.addEventListener("click", event => {
        checkForWinX();
     } else if (playerTurn === "2" && box7.textContent === "") {
         box7.textContent = "O";
-        checkForWinO();
-          
+        checkForWinO();       
     }
 })
 
@@ -118,14 +106,6 @@ box9.addEventListener("click", event => {
     }
 })
 
-
-// function checkGameState () {
-//     if ( box1.textContent === "X" && box2.textContent === "X" && box3.textContent === "X") {
-//         statusBox.textContent = "Player 1 Wins!";
-//         return true;
-//     } else return false;
-// }
-
 function reset() {
     box1.textContent = "";
     box2.textContent = "";
@@ -149,8 +129,7 @@ function reset() {
     document.getElementById("status").style.fontWeight = "normal";
     statusBox.textContent = "Player 1's Turn"
     playerTurn = "1"
-
-
+    turns = "0"
 }
 
 function checkForWinX() {
@@ -158,11 +137,17 @@ function checkForWinX() {
         statusBox.textContent = "Player 1 Wins!";
         gameOver();
         playerTurn = "0";
-    } else {
+    } else if (turns === 8) {
+        statusBox.textContent = "It's a tie!";
+        gameOver();
+        playerTurn = "0";
+    }
+      else {
+        turns++;
+        console.log(turns);
         playerTurn = "2";
         statusBox.textContent = "Player 2's Turn"
     }
-     
 }
 
 function checkForWinO() {
@@ -170,7 +155,13 @@ function checkForWinO() {
         statusBox.textContent = "Player 2 Wins!";
         gameOver();
         playerTurn = "0";
+    } else if (turns === 8) {
+        statusBox.textContent = "It's a tie!";
+        gameOver();
+        playerTurn = "0";
     } else {
+        turns++;
+        console.log(turns);
         playerTurn = "1";
         statusBox.textContent = "Player 1's Turn"
     }
@@ -244,9 +235,7 @@ function gameOver() {
     }
     document.getElementById("status").style.color = "red";
     document.getElementById("status").style.fontWeight = "bold";
-
 }
-
 
 resetButton.addEventListener("click", event => {
     reset();
